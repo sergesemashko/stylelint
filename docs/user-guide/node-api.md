@@ -79,7 +79,7 @@ You can use this option to see what your linting results would be like without t
 
 ## `cache`
 
-Store the info about processed files in order to only operate on the changed ones. The cache is stored in `.stylelintcache` by default. Enabling this option can dramatically improve ESLint's running time by ensuring that only changed files are linted.
+Store the info about processed files in order to only operate on the changed ones. The cache is stored in `.stylelintcache` by default. Enabling this option can dramatically improve Stylelint's running time by ensuring that only changed files are linted.
 
 **Note:** If you run Stylelint with `--cache` and then run Stylelint without `--cache`, the `.stylelintcache` file will be deleted. This is necessary because the results of the lint might change and make `.stylelintcache` invalid. If you want to control when the cache file is deleted, then use `--cache-location` to specify an alternate location for the cache file.
 
