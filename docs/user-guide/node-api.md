@@ -77,6 +77,20 @@ If `true`, all disable comments (e.g. `/* stylelint-disable block-no-empty */`) 
 
 You can use this option to see what your linting results would be like without those exceptions.
 
+## `cache`
+
+Store the info about processed files in order to only operate on the changed ones. The cache is stored in `.stylelintcache` by default. Enabling this option can dramatically improve ESLint's running time by ensuring that only changed files are linted.
+
+**Note:** If you run Stylelint with `--cache` and then run Stylelint without `--cache`, the `.stylelintcache` file will be deleted. This is necessary because the results of the lint might change and make `.stylelintcache` invalid. If you want to control when the cache file is deleted, then use `--cache-location` to specify an alternate location for the cache file.
+
+## `cacheLocation`
+
+Path to the cache location. Can be a file or a directory. If no location is specified, `.stylelintcache` will be used. In that case, the file will be created in the directory where the `stylelint` command is executed.
+
+If a directory is specified, a cache file will be created inside the specified folder. The name of the file will be based on the hash of the current working directory (CWD). e.g.: `.cache_hashOfCWD`
+
+**Important note:** If the directory for the cache does not exist make sure you add a trailing `/` on \*nix systems or `\` in windows. Otherwise the path will be assumed to be a file.
+
 ### `reportNeedlessDisables`
 
 If `true`, `ignoreDisables` will also be set to `true` and the returned data will contain a `needlessDisables` property, whose value is an array of objects, one for each source, with tells you which stylelint-disable comments are not blocking a lint warning.
