@@ -79,15 +79,15 @@ You can use this option to see what your linting results would be like without t
 
 ## `cache`
 
-Store the info about processed files in order to only operate on the changed ones. The cache is stored in `.stylelintcache` by default. Enabling this option can dramatically improve Stylelint's running time by ensuring that only changed files are linted.
+Store the info about processed files in order to only operate on the changed ones. The cache is stored in `.stylelintcache` by default. Enabling this option can dramatically improve stylelint's running time by ensuring that only changed files are linted.
 
-**Note:** If you run Stylelint with `--cache` and then run Stylelint without `--cache`, the `.stylelintcache` file will be deleted. This is necessary because the results of the lint might change and make `.stylelintcache` invalid. If you want to control when the cache file is deleted, then use `--cache-location` to specify an alternate location for the cache file.
+**Note:** If you run stylelint with `--cache` and then run stylelint without `--cache`, the `.stylelintcache` file will be deleted. This is necessary because the results of the lint might change and make `.stylelintcache` invalid.
 
 ## `cacheLocation`
 
 Path to the cache location. Can be a file or a directory. If no location is specified, `.stylelintcache` will be used. In that case, the file will be created in the directory where the `stylelint` command is executed.
 
-If a directory is specified, a cache file will be created inside the specified folder. The name of the file will be based on the hash of the current working directory (CWD). e.g.: `.cache_hashOfCWD`
+If a directory is specified, a cache file will be created inside the specified folder. The name of the file will be based on the hash of the current working directory (CWD). e.g.: `.cache_hashOfCWD`. This will allow to reuse a single location for the caches from different projects and still receive the benefits of the cache.
 
 **Important note:** If the directory for the cache does not exist make sure you add a trailing `/` on \*nix systems or `\` in windows. Otherwise the path will be assumed to be a file.
 
