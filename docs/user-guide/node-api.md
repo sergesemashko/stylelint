@@ -79,17 +79,19 @@ You can use this option to see what your linting results would be like without t
 
 ## `cache`
 
-Store the info about processed files in order to only operate on the changed ones. The cache is stored in `.stylelintcache` by default. Enabling this option can dramatically improve stylelint's running time by ensuring that only changed files are linted.
+Store the info about processed files in order to only operate on the changed ones the next time you run stylelint. Enabling this option can dramatically improve stylelint's speed, because only changed files will be linted.
 
-**Note:** If you run stylelint with `--cache` and then run stylelint without `--cache`, the `.stylelintcache` file will be deleted. This is necessary because the results of the lint might change and make `.stylelintcache` invalid.
+By default, the cache is stored in `.stylelintcache` in `process.cwd()`. To change this, use the `cacheLocation` option.
+
+**Note:** If you run stylelint with `cache` and then run stylelint without `cache`, the `.stylelintcache` file will be deleted. This is necessary because we have to assume that `.stylelintcache` was invalidated by that second command.
 
 ## `cacheLocation`
 
-Path to the cache location. Can be a file or a directory. If no location is specified, `.stylelintcache` will be used. In that case, the file will be created in the directory where the `stylelint` command is executed.
+A path to a file or directory to be used for `cache`. Only meaningful alongside `cache`. If no location is specified, `.stylelintcache` will be created in `process.cwd()`.
 
-If a directory is specified, a cache file will be created inside the specified folder. The name of the file will be based on the hash of the current working directory (CWD). e.g.: `.cache_hashOfCWD`. This will allow to reuse a single location for the caches from different projects and still receive the benefits of the cache.
+If a directory is specified, a cache file will be created inside the specified folder. The name of the file will be based on the hash of `process.cwd()` (e.g. `.cache_hashOfCWD`). This allows stylelint to reuse a single location for a variety of caches from different projects.
 
-**Important note:** If the directory for the cache does not exist make sure you add a trailing `/` on \*nix systems or `\` in windows. Otherwise the path will be assumed to be a file.
+**Note:** If the directory of `cacheLocation` does not exist, make sure you add a trailing `/` on \*nix systems or `\` on Windows. Otherwise, the path will be assumed to be a file.
 
 ### `reportNeedlessDisables`
 
