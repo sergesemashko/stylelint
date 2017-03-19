@@ -5,6 +5,25 @@ const basicChecks = require("./lib/testUtils/basicChecks")
 const stylelint = require("./lib/standalone")
 
 global.testRule = (rule, schema) => {
+  expect.extend({
+    toHaveMessage(testCase) {
+      if (
+        testCase.message === undefined
+      ) {
+        return {
+          message: () => (
+            "Expected \"reject\" test case to have a \"message\" property"
+          ),
+          pass: false,
+        }
+      }
+
+      return {
+        pass: true,
+      }
+    },
+  })
+
   describe(schema.ruleName, () => {
     const stylelintConfig = {
       rules: {
@@ -45,13 +64,16 @@ global.testRule = (rule, schema) => {
               syntax: schema.syntax,
             }).then((output) => {
               const warning = output.results[0].warnings[0]
-              if (testCase.message) {
+
+              expect(testCase).toHaveMessage()
+
+              if (testCase.message !== undefined) {
                 expect(_.get(warning, "text")).toBe(testCase.message)
               }
-              if (testCase.line) {
+              if (testCase.line !== undefined) {
                 expect(_.get(warning, "line")).toBe(testCase.line)
               }
-              if (testCase.column) {
+              if (testCase.column !== undefined) {
                 expect(_.get(warning, "column")).toBe(testCase.column)
               }
             })
